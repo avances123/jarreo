@@ -8,7 +8,7 @@
 		  <a href="#" class="item item-icon-left">
 		    <i class="icon ion-android-stopwatch"></i>
 		    Numero de Ronda:
-		    <span class="badge badge-positive">{{num_ronda}}</span>
+		    <span class="badge badge-positive">{{rondas.length}}</span>
 		  </a>
 
 		  <a href="#" class="item item-icon-left">
@@ -21,14 +21,15 @@
 		   <a class="item item-icon-left" href="#">
 		    <i class="icon ion-cash"></i>
 		    Le debeis al bar
-		    <span class="badge badge-assertive">12€</span>
+		    <span class="badge badge-assertive">{{deudaTotal}} €</span>
 		  </a>
 
 	  </div>
-		<div class="row responsive-sm">
-		<div class="button-bar">
-			<a class="button button-block button-assertive" ng-click="num_ronda=num_ronda+1">Nueva ronda</a>
-			<a class="button button-block button-positive" ng-click="num_ronda=null">Resetear</a>
+		<div class="row">
+			<button class="button button-block button-balanced icon-left ion-beer" ng-click="nuevaRonda()">Nueva ronda</button>
+		</div>
+		<div class="row">
+			<button class="button button-block button-stable" ng-click="resetRondas()">Resetear</button>
 		</div>
   </ion-content>
 </ion-view>

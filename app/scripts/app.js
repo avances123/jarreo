@@ -37,7 +37,17 @@ angular.module('Ionic', ['ionic', 'config', 'Ionic.controllers'])
       views: {
         'menuContent' :{
           templateUrl: 'templates/jarreo.html',
-          //controller: 'JarreoCtrl'
+          controller: 'JarreoCtrl'
+        }
+      }
+    })
+
+    .state('app.configuracion', {
+      url: '/configuracion',
+      views: {
+        'menuContent' :{
+          templateUrl: 'templates/configuracion.html',
+          controller: 'ConfiguracionCtrl'
         }
       }
     })
@@ -54,5 +64,91 @@ angular.module('Ionic', ['ionic', 'config', 'Ionic.controllers'])
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/jarreo');
+})
+
+.service('Participantes', function () {
+  var participantes = [];
+  var participantesActivos = [];
+
+  var addParticipante = function  (nombre) {
+    participantes.push({'nombre':nombre,'activo':true,'deuda':0});
+  };
+
+  var getParticipantes = function(){
+    return participantes;
+  };
+
+  var getParticipantesActivos = function(){
+    participantesActivos = [];
+    angular.forEach(participantes, function(value) {
+      if (value.activo) {
+        participantesActivos.push(value);
+      }
+    });
+    return participantesActivos;
+  };
+
+  return {
+    addParticipante:addParticipante,
+    getParticipantes:getParticipantes,
+    getParticipantesActivos:getParticipantesActivos
+  };
+})
+
+.service('Configuracion', function () {
+  var datos = {
+    bebida : 'Cerveza',
+    precio : 1.25
+  };
+
+  var setConfig = function  (data) {
+    datos = data;
+  };
+
+  var getConfig = function(){
+    return datos;
+  };
+
+
+
+  return {
+    setConfig:setConfig,
+    getConfig:getConfig
+  };
+
+})
+
+.service('Rondas', function () {
+  var rondas = [];
+  var precio = 0;
+
+  var addRonda = function  (ronda) {
+    rondas.push(ronda);
+  };
+
+  var getRondas = function(){
+    console.log(rondas);
+    return rondas;
+  };
+
+  var resetRondas = function(){
+    rondas = [];
+  };
+
+  var getDeudaTotal = function(){
+    precio = 0;
+    angular.forEach(rondas, function(value) {
+      precio = precio + value.participantes.length * value.precio;
+    });
+    return precio;
+  };
+
+  return {
+    addRonda:addRonda,
+    getRondas:getRondas,
+    getDeudaTotal:getDeudaTotal,
+    resetRondas:resetRondas
+  };
 });
+
 

@@ -7,7 +7,7 @@
 
 		  <li class="item item-checkbox" ng-repeat="participante in participantes">
 		     <label class="checkbox">
-		       <input type="checkbox" ng-checked="participante.activo">
+		       <input type="checkbox" ng-checked="participante.activo" ng-model="participante.activo">
 		     </label>
 		     {{participante.nombre}}
 		  </li>
@@ -15,7 +15,7 @@
 		    <label class="item-input-wrapper">
 		      <input type="text" placeholder="Nombre" ng-model="nuevo_nombre">
 		    </label>
-		    <button class="button button-small" ng-click="add_nuevo_participante(nuevo_nombre);nuevo_nombre=undefined">
+		    <button class="button button-small" ng-click="addNuevoParticipante(nuevo_nombre);nuevo_nombre=undefined">
 		      Añadir
 		    </button>
 		  </div>
